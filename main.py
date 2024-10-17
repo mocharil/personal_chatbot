@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from mangum import Mangum
 
 # Inisialisasi aplikasi FastAPI
 app = FastAPI()
@@ -22,3 +23,5 @@ async def read_root():
 async def read_item(item_id: int):
     return {"item_id": item_id, "description": f"This is item {item_id}"}
 
+# Handler for Vercel serverless function
+handler = Mangum(app)
